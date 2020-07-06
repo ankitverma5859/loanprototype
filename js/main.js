@@ -11,6 +11,7 @@ var config = {
 // Initialize Firebase
 firebase.initializeApp(config);
 
+//Reference for CarLoan
 var carLoanRef = firebase.database().ref('carLoan');
 
 //Listen for form submit
