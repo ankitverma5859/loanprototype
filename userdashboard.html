@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Prototype - Car Loan Services</title>
+        <title>Prototype - Loan Services</title>
         <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
@@ -16,6 +16,8 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
     </head>
+
+
     <body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav" style="background-color: black;">
@@ -40,95 +42,87 @@
                 </div>
             </div>
         </nav>
-        
+
         <!-- Services-->
-        <section class="page-section" id="apply" style="margin-top:50px">
+        <section class="page-section" id="apply" style="margin-top: 20px;">
             <div class="container">
 
                 <div class="text-center">
-                    <h2 class="section-heading text-uppercase">Apply for Car Loan</h2>
+                    <h2 class="section-heading text-uppercase">Apply for Loan</h2>
                 </div>
 
-                <div class="row">
-                    <div class="col-sm-4"></div>
+                <div class="row" style="margin-bottom:20px">
                     <div class="col-sm-4">
-                        <form id="carLoanForm" action="">
-
-                            <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control" id="userName" required="required">
+                        <div class="card" >
+                            <img class="card-img-top" src="assets/img/car.jpg" alt="Card image" style="width:100%">
+                            <div class="card-body">
+                              <h4 class="card-title">Car Loan</h4>
+                              <p class="card-text">Drive you dream car home with easy loans.</p>
+                              <a href="./carloan.html" class="btn btn-primary">Apply</a>
                             </div>
-
-                            <div class="form-group">
-                                <label for="birthday">Birthdate</label>
-                                <input type="date" class="form-control" id="birthday" name="birthday" required="required" onblur="return validateDOB()">
-                                <span style="color: red;" id="birthDateErrorMessage"></span>
-                            </div>
-                            
-                            <!-- <div class="form-group">
-                                <label for="typeOfCarLoan">What type of car loan are you applying for?</label>
-                                <select class="form-control" id="typeOfCar">
-                                    <option value="NCL">New Car Loan</option>
-                                    <option value="OCL">Old Car Loan</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="useType">Use of Vehicle</label>
-                                <select class="form-control" id="useTypeOfCar">
-                                    <option value="private">Private</option>
-                                    <option value="commercial">Commercial</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="ownerType">Owner of Vehicle</label>
-                                <select class="form-control" id="ownerTypeOfCar" >
-                                  <option value="individual">Individual</option>
-                                  <option value="group">Group</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="usr">Market Value of the car?</label>
-                                <input type="text" class="form-control" id="carMarketValue">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="usr">Loan Amount Requested</label>
-                                <input type="text" class="form-control" id="requestedLoanAmount">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="loanDuration">Loan Tenure</label>
-                                <select class="form-control" id="loanDurationInMonths">
-                                  <option value="three">3 Months</option>
-                                  <option value="six">6 Months</option>
-                                  <option value="nine">9 Months</option>
-                                  <option value="twelve">12 Months</option>
-                                  <option value="fifteen">15 Months</option>
-                                  <option value="eighteen">18 Months</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="usr">Gross Income</label>
-                                <input type="text" class="form-control" id="grossIncome">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="usr">Other Borrowing Amount</label>
-                                <input type="text" class="form-control" id="otherBorrowingAmount">
-                            </div> -->
-
-                            <!-- <button type="submit" class="btn btn-outline-info mb-2">Apply</button>
-                            <div class="alert" style="display:none;">Your message has been sent</div> -->
-                          </form>
+                          </div>
                     </div>
-                    <div class="col-sm-4"></div>
+
+                    <div class="col-sm-4">
+                        <div class="card" >
+                            <img class="card-img-top" src="assets/img/education.jpg" alt="Card image" style="width:100%">
+                            <div class="card-body">
+                              <h4 class="card-title">Education Loan</h4>
+                              <p class="card-text">Make you education plans happen with easy loans.</p>
+                              <a href="#" class="btn btn-primary">Apply</a>
+                            </div>
+                          </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="card" >
+                            <img class="card-img-top" src="assets/img/house.jpg" alt="Card image" style="width:100%">
+                            <div class="card-body">
+                              <h4 class="card-title">Housing Loan</h4>
+                              <p class="card-text">Make your dream home come true with easy loan.</p>
+                              <a href="#" class="btn btn-primary">Apply</a>
+                            </div>
+                          </div>
+                    </div>
                 </div>
 
                 
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="card" >
+                            <img class="card-img-top" src="assets/img/car.jpg" alt="Card image" style="width:100%">
+                            <div class="card-body">
+                              <h4 class="card-title">Personal Overdraft</h4>
+                              <p class="card-text">Description of the loan.</p>
+                              <a href="#" class="btn btn-primary">Apply</a>
+                            </div>
+                          </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="card" >
+                            <img class="card-img-top" src="assets/img/car.jpg" alt="Card image" style="width:100%">
+                            <div class="card-body">
+                              <h4 class="card-title">Mortagage Loan</h4>
+                              <p class="card-text">Description of the loan..</p>
+                              <a href="#" class="btn btn-primary">Apply</a>
+                            </div>
+                          </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="card" >
+                            <img class="card-img-top" src="assets/img/car.jpg" alt="Card image" style="width:100%">
+                            <div class="card-body">
+                              <h4 class="card-title">Nabil Share Loan</h4>
+                              <p class="card-text">Description of the loan..</p>
+                              <a href="#" class="btn btn-primary">Apply</a>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+
                 
             </div>
         </section>
@@ -151,22 +145,15 @@
             </div>
         </footer>
         
-        <!-- The core Firebase JS SDK is always required and must be listed first -->   
-        <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
-
-        <script src="js/main.js"></script>
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
         <!-- Third party plugin JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-        <!-- Contact form JS-->
-        <script src="assets/mail/jqBootstrapValidation.js"></script>
-        <script src="assets/mail/contact_me.js"></script>
+       
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+
         <!-- The core Firebase JS SDK is always required and must be listed first -->
         <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
         <!-- Add Firebase products that you want to use -->
