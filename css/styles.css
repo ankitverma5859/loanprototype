@@ -11,6 +11,10 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
+.errorText{
+  font-size:x-small;
+}
+
 /* Full-width input fields */
 input[type=text], input[type=password] {
   width: 100%;

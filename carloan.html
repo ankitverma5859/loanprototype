@@ -62,67 +62,85 @@
                             <div class="form-group">
                                 <label for="birthday">Birthdate</label>
                                 <input type="date" class="form-control" id="birthday" name="birthday" required="required" onblur="return validateDOB()">
-                                <span style="color: red;" id="birthDateErrorMessage"></span>
+                                <span class="errorText" style="color: red;" id="birthDateErrorMessage"></span>
                             </div>
                             
-                            <!-- <div class="form-group">
-                                <label for="typeOfCarLoan">What type of car loan are you applying for?</label>
-                                <select class="form-control" id="typeOfCar">
-                                    <option value="NCL">New Car Loan</option>
-                                    <option value="OCL">Old Car Loan</option>
+                            <div class="form-group">
+                                <label for="purposeOfLoan">Purpose of Loan</label>
+                                <select class="form-control" id="purposeOfLoan" onblur="return checkPurposeOfLoan()" required>
+                                    <option value="" selected disabled hidden>Choose here</option>
+                                    <option value="newVehicle">New Vehicle</option>
+                                    <option value="oldVehicle">Used Vehicle</option>
+                                    <option value="refinancing">Refinancing</option>
                                 </select>
                             </div>
 
+                            <div class="form-group" style="display: none;" id="vatBillAmount">
+                                <label for="vatBillamount">Vat Bill Amount of the Car</label>
+                                <input type="text" class="form-control" id="vatBillAmountValue" required="required" onblur="return validateFloatValue('vatBillAmountValue' ,'vatBillAmountError')">
+                                <span class="errorText" style="color: red;" id="vatBillAmountError"></span>
+                            </div>
+
+                            <div class="form-group" style="display: none;" id="carAge">
+                                <label for="vatBillamount">How old is the car?</label>
+                                <input type="text" class="form-control" id="carAgeValue" required="required" onblur="return validateFloatValue('carAgeValue' ,'carAgeError')">
+                                <span class="errorText" style="color: red;" id="carAgeError"></span>
+                            </div>
+
+                            <div class="form-group" style="display: none;" id="currentValueOfCar">
+                                <label for="vatBillamount">Current value of the car?</label>
+                                <input type="text" class="form-control" id="currentValueOfCarValue" required="required" onblur="return validateFloatValue('currentValueOfCarValue' ,'currentValueOfCarError')">
+                                <span class="errorText" style="color: red;" id="currentValueOfCarError"></span>
+                            </div>
+
                             <div class="form-group">
-                                <label for="useType">Use of Vehicle</label>
-                                <select class="form-control" id="useTypeOfCar">
-                                    <option value="private">Private</option>
+                                <label for="typeOfLoan">Type of Loan</label>
+                                <select class="form-control" id="typeOfLoan" required>
+                                    <option value="" selected disabled hidden>Choose here</option>
+                                    <option value="personal">Personal</option>
                                     <option value="commercial">Commercial</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label for="ownerType">Owner of Vehicle</label>
-                                <select class="form-control" id="ownerTypeOfCar" >
-                                  <option value="individual">Individual</option>
-                                  <option value="group">Group</option>
+                                <label for="typeOfVehicle">Type of Vehicle</label>
+                                <select class="form-control" id="typeOfVehicle" required>
+                                    <option value="" selected disabled hidden>Choose here</option>
+                                    <option value="personal">Personal</option>
+                                    <option value="commercial">Commercial</option>
+                                    <option value="tractor">Tractor</option>
+                                    <option value="electric">Electric</option>
                                 </select>
                             </div>
 
                             <div class="form-group">
-                                <label for="usr">Market Value of the car?</label>
-                                <input type="text" class="form-control" id="carMarketValue">
+                                <label for="loanAmount">Loan Amount</label>
+                                <input type="text" class="form-control" id="loanAmount" required="required" onblur="return validateFloatValue('loanAmount' ,'loanAmountError')">
+                                <span class="errorText" style="color: red;" id="loanAmountError"></span>
                             </div>
 
                             <div class="form-group">
-                                <label for="usr">Loan Amount Requested</label>
-                                <input type="text" class="form-control" id="requestedLoanAmount">
+                                <label for="loanTenure">Loan Tenure(in Years)</label>
+                                <input type="text" class="form-control" id="loanTenure" required="required" onblur="return validateLoanTenure()">
+                                <span class="errorText" style="color: red;" id="loanTenureError"></span>
                             </div>
 
                             <div class="form-group">
-                                <label for="loanDuration">Loan Tenure</label>
-                                <select class="form-control" id="loanDurationInMonths">
-                                  <option value="three">3 Months</option>
-                                  <option value="six">6 Months</option>
-                                  <option value="nine">9 Months</option>
-                                  <option value="twelve">12 Months</option>
-                                  <option value="fifteen">15 Months</option>
-                                  <option value="eighteen">18 Months</option>
-                                </select>
+                                <label for="grossIncome">Gross Income (per latest tax filing)</label>
+                                <input type="text" class="form-control" id="grossIncome" required="required" onblur="return validateFloatValue('grossIncome' ,'grossIncomeError')">
+                                <span class="errorText" style="color: red;" id="grossIncomeError"></span>
                             </div>
 
                             <div class="form-group">
-                                <label for="usr">Gross Income</label>
-                                <input type="text" class="form-control" id="grossIncome">
+                                <label for="loanObligations">Other Monthly Loan Obligations:</label>
+                                <input type="text" class="form-control" id="loanObligations" required="required" onblur="return validateFloatValue('loanObligations' ,'loanObligationsError')">
+                                <span class="errorText" style="color: red;" id="loanObligationsError"></span>
                             </div>
 
-                            <div class="form-group">
-                                <label for="usr">Other Borrowing Amount</label>
-                                <input type="text" class="form-control" id="otherBorrowingAmount">
-                            </div> -->
+                            
 
-                            <!-- <button type="submit" class="btn btn-outline-info mb-2">Apply</button>
-                            <div class="alert" style="display:none;">Your message has been sent</div> -->
+                            <button type="submit" class="btn btn-outline-info mb-2">Apply</button>
+                            <div class="alert" style="display:none;">Your message has been sent</div>
                           </form>
                     </div>
                     <div class="col-sm-4"></div>

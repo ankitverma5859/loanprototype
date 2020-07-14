@@ -1,4 +1,9 @@
 
+//#region Global Variables
+var userAge = NaN;
+
+//#endregion
+
 //#region  SignUp Modal Close Logic
 // Get the modal
 var modal = document.getElementById('signUpModal');
@@ -11,26 +16,70 @@ window.onclick = function(event) {
 }
 //#endregion
 
+//#region Check for Purpose of Loan
+function checkPurposeOfLoan(){
+    var purposeOfLoan = document.getElementById('purposeOfLoan').value;
+    if(!purposeOfLoan.localeCompare('newVehicle')){
+        document.getElementById('vatBillAmount').style.display = "block";
+        document.getElementById('carAge').style.display = "none";
+        document.getElementById('currentValueOfCar').style.display = "none";
+    }
+    else{
+        document.getElementById('vatBillAmount').style.display = "none";
+        document.getElementById('carAge').style.display = "block";
+        document.getElementById('currentValueOfCar').style.display = "block";
+    }  
+}
+//#endregion
 
-//#region Validate Birthdate
+//#region Birthdate Validation
 function validateDOB(){
-    var minAge = 18;
     var birthdate = new Date(document.getElementById('birthday').value);
 
     if(birthdate != ''){
         var today = new Date();
         var timeDiff = Math.abs(today.getTime() - birthdate.getTime());
         var ageDifference = Math.ceil(timeDiff / (1000 * 3600 * 24)) / 365;
-        var ageDiffInYear = parseInt(ageDifference.toString().split('.')[0]);
+        userAge = parseInt(ageDifference.toString().split('.')[0]);
 
-        if(ageDiffInYear < 21){
+        if(userAge < 21){
             document.getElementById('birthDateErrorMessage').innerHTML = "You should be atleast 21 years to apply for loan.";
         }else{
             document.getElementById('birthDateErrorMessage').innerHTML = "";
         }
     }
 }
+//#endregion
 
+function validateFloatValue(valueId ,errorMessageId){
+    var numDecimalRegexExp = /^[1-9]\d*(\.\d+)?$/;
+    var loanAmount = document.getElementById(valueId).value;
+
+    var regResult = loanAmount.match(numDecimalRegexExp);
+    var amount = parseFloat(loanAmount);
+    
+    
+    if(isNaN(amount) || regResult == null ){
+        document.getElementById(errorMessageId).innerHTML = "Invalid Value";
+    }else{
+        document.getElementById(errorMessageId).innerHTML = "";
+    }
+}
+
+//#region Loan Amount Validation
+function validateLoanTenure(){
+    var loanTenure = document.getElementById('loanTenure').value;
+    var amount = parseInt(loanTenure);
+    if(isNaN(amount)){
+        document.getElementById('loanTenureError').innerHTML = "Invalid Value";
+    }
+    else if(userAge + amount > 65){
+        document.getElementById('loanTenureError').innerHTML = "Loan Tenure Exceeded Exceeded Limit! Loan Tenure + Age shouldn't exceed 65";
+    }
+    else{
+        document.getElementById('loanTenureError').innerHTML = "";
+    }
+}
 //#endregion
 
 
