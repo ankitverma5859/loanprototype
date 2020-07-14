@@ -52,11 +52,11 @@
                 <div class="row">
                     <div class="col-sm-4"></div>
                     <div class="col-sm-4">
-                        <form id="carLoanForm" action="">
+                        <form id="carLoanForm" action="" onsubmit="return validateCarLoanForm()">
 
                             <div class="form-group">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control" id="userName" required="required">
+                                <label>Name</label>
+                                <input type="text" class="form-control" id="userName" name="userName" required="required">
                             </div>
 
                             <div class="form-group">
@@ -67,7 +67,7 @@
                             
                             <div class="form-group">
                                 <label for="purposeOfLoan">Purpose of Loan</label>
-                                <select class="form-control" id="purposeOfLoan" onblur="return checkPurposeOfLoan()" required>
+                                <select class="form-control" id="purposeOfLoan" name="purposeOfLoan" onblur="return checkPurposeOfLoan()" required>
                                     <option value="" selected disabled hidden>Choose here</option>
                                     <option value="newVehicle">New Vehicle</option>
                                     <option value="oldVehicle">Used Vehicle</option>
@@ -77,25 +77,25 @@
 
                             <div class="form-group" style="display: none;" id="vatBillAmount">
                                 <label for="vatBillamount">Vat Bill Amount of the Car</label>
-                                <input type="text" class="form-control" id="vatBillAmountValue" required="required" onblur="return validateFloatValue('vatBillAmountValue' ,'vatBillAmountError')">
+                                <input type="text" class="form-control" id="vatBillAmountValue" onblur="return validateFloatValue('vatBillAmountValue' ,'vatBillAmountError')">
                                 <span class="errorText" style="color: red;" id="vatBillAmountError"></span>
                             </div>
 
                             <div class="form-group" style="display: none;" id="carAge">
                                 <label for="vatBillamount">How old is the car?</label>
-                                <input type="text" class="form-control" id="carAgeValue" required="required" onblur="return validateFloatValue('carAgeValue' ,'carAgeError')">
+                                <input type="text" class="form-control" id="carAgeValue" onblur="return validateFloatValue('carAgeValue' ,'carAgeError')">
                                 <span class="errorText" style="color: red;" id="carAgeError"></span>
                             </div>
 
                             <div class="form-group" style="display: none;" id="currentValueOfCar">
                                 <label for="vatBillamount">Current value of the car?</label>
-                                <input type="text" class="form-control" id="currentValueOfCarValue" required="required" onblur="return validateFloatValue('currentValueOfCarValue' ,'currentValueOfCarError')">
+                                <input type="text" class="form-control" id="currentValueOfCarValue" onblur="return validateFloatValue('currentValueOfCarValue' ,'currentValueOfCarError')">
                                 <span class="errorText" style="color: red;" id="currentValueOfCarError"></span>
                             </div>
 
                             <div class="form-group">
                                 <label for="typeOfLoan">Type of Loan</label>
-                                <select class="form-control" id="typeOfLoan" required>
+                                <select class="form-control" id="typeOfLoan" name="typeOfLoan" required>
                                     <option value="" selected disabled hidden>Choose here</option>
                                     <option value="personal">Personal</option>
                                     <option value="commercial">Commercial</option>
@@ -115,7 +115,7 @@
 
                             <div class="form-group">
                                 <label for="loanAmount">Loan Amount</label>
-                                <input type="text" class="form-control" id="loanAmount" required="required" onblur="return validateFloatValue('loanAmount' ,'loanAmountError')">
+                                <input type="text" class="form-control" id="loanAmount" name="loanAmount" required="required" onblur="return validateFloatValue('loanAmount' ,'loanAmountError')">
                                 <span class="errorText" style="color: red;" id="loanAmountError"></span>
                             </div>
 
@@ -138,10 +138,10 @@
                             </div>
 
                             
-
-                            <button type="submit" class="btn btn-outline-info mb-2">Apply</button>
-                            <div class="alert" style="display:none;">Your message has been sent</div>
-                          </form>
+                            <input type="submit" class="btn btn-outline-info mb-2" value="Submit"></br>
+                            <span class="errorText" id="error" style="color: red;">Error Detail</span>
+                            
+                        </form>
                     </div>
                     <div class="col-sm-4"></div>
                 </div>

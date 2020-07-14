@@ -21,13 +21,16 @@ function checkPurposeOfLoan(){
     var purposeOfLoan = document.getElementById('purposeOfLoan').value;
     if(!purposeOfLoan.localeCompare('newVehicle')){
         document.getElementById('vatBillAmount').style.display = "block";
+        document.getElementById("vatBillAmountValue").required = true;
         document.getElementById('carAge').style.display = "none";
         document.getElementById('currentValueOfCar').style.display = "none";
     }
     else{
         document.getElementById('vatBillAmount').style.display = "none";
         document.getElementById('carAge').style.display = "block";
+        document.getElementById("carAgeValue").required = true;
         document.getElementById('currentValueOfCar').style.display = "block";
+        document.getElementById("currentValueOfCarValue").required = true;
     }  
 }
 //#endregion
@@ -52,6 +55,7 @@ function validateDOB(){
 //#endregion
 
 function validateFloatValue(valueId ,errorMessageId){
+    
     var numDecimalRegexExp = /^[1-9]\d*(\.\d+)?$/;
     var loanAmount = document.getElementById(valueId).value;
 
@@ -81,6 +85,18 @@ function validateLoanTenure(){
     }
 }
 //#endregion
+
+function validateCarLoanForm(){
+    var purposeOfLoan = document.forms["carLoanForm"]["purposeOfLoan"].value;
+    var typeOfLoan = document.forms["carLoanForm"]["typeOfLoan"].value;
+    var loanAmount = parseFloat(document.forms["carLoanForm"]["loanAmount"].value);
+    if(!purposeOfLoan.localeCompare("newVehicle") && !typeOfLoan.localeCompare("personal")){
+        if(loanAmount > 8000000){
+            document.getElementById('error').innerHTML = "Loan amount cannot exceed Rs. 8,000,000";
+        }
+    }
+    return false;
+}
 
 
 // //Reference for CarLoan
