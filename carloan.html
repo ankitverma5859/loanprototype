@@ -77,7 +77,7 @@
 
                             <div class="form-group" style="display: none;" id="vatBillAmount">
                                 <label for="vatBillamount">Vat Bill Amount of the Car</label>
-                                <input type="text" class="form-control" id="vatBillAmountValue" onblur="return validateFloatValue('vatBillAmountValue' ,'vatBillAmountError')">
+                                <input type="text" class="form-control" id="vatBillAmountValue" name="vatBillAmountValue" onblur="return validateFloatValue('vatBillAmountValue' ,'vatBillAmountError')">
                                 <span class="errorText" style="color: red;" id="vatBillAmountError"></span>
                             </div>
 
@@ -121,7 +121,7 @@
 
                             <div class="form-group">
                                 <label for="loanTenure">Loan Tenure(in Years)</label>
-                                <input type="text" class="form-control" id="loanTenure" required="required" onblur="return validateLoanTenure()">
+                                <input type="text" class="form-control" id="loanTenure" name="loanTenure" required="required" onblur="return validateLoanTenure()">
                                 <span class="errorText" style="color: red;" id="loanTenureError"></span>
                             </div>
 

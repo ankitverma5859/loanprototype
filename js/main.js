@@ -90,11 +90,75 @@ function validateCarLoanForm(){
     var purposeOfLoan = document.forms["carLoanForm"]["purposeOfLoan"].value;
     var typeOfLoan = document.forms["carLoanForm"]["typeOfLoan"].value;
     var loanAmount = parseFloat(document.forms["carLoanForm"]["loanAmount"].value);
+    var loanTenure = parseFloat(document.forms["carLoanForm"]["loanTenure"].value);
+    var ageOfCar = parseFloat(document.forms["carLoanForm"]["carAgeValue"].value);
+    var currentValueOfCarValue = parseFloat(document.forms["carLoanForm"]["currentValueOfCarValue"].value);
+    var vatBillAmountValue = parseFloat(document.forms["carLoanForm"]["vatBillAmountValue"].value);
+
     if(!purposeOfLoan.localeCompare("newVehicle") && !typeOfLoan.localeCompare("personal")){
-        if(loanAmount > 8000000){
-            document.getElementById('error').innerHTML = "Loan amount cannot exceed Rs. 8,000,000";
+        var fiftyPercentOfVatBill = vatBillAmountValue*0.5;
+        if(loanAmount > fiftyPercentOfVatBill){
+            document.getElementById('error').innerHTML = "Loan amount cannot exceed more than 50% of the Vat Bill Value.";
+        }
+        else if(loanAmount > 8000000){
+            document.getElementById('error').innerHTML = "Loan amount cannot exceed Rs. 8,000,000.";
+        }
+        else if(loanTenure > 7)
+        {
+            document.getElementById('error').innerHTML = "Loan tenure cannot exceed more than 7 years.";
+        }
+        else{
+            document.getElementById('error').innerHTML = "";
         }
     }
+
+    if(!purposeOfLoan.localeCompare("newVehicle") && !typeOfLoan.localeCompare("commercial")){
+        var seventyPercentOfVatBill = vatBillAmountValue*0.7;
+        if(loanAmount > seventyPercentOfVatBill){
+            document.getElementById('error').innerHTML = "Loan amount cannot exceed more than 70% of the Vat Bill Value.";
+        }
+        else if(loanAmount > 8000000){
+            document.getElementById('error').innerHTML = "Loan amount cannot exceed Rs. 8,000,000.";
+        }
+        else if(loanTenure > 5)
+        {
+            document.getElementById('error').innerHTML = "Loan tenure cannot exceed more than 5 years.";
+        }
+        //Distress Value Coming soon!!!
+        else{
+            document.getElementById('error').innerHTML = "";
+        }
+    }
+
+    if(!purposeOfLoan.localeCompare("oldVehicle")){
+        var fiftyPercentOfCurrentValueOfCarValue = currentValueOfCarValue*0.5;
+        if(loanTenure + ageOfCar > 7){
+            document.getElementById('error').innerHTML = "Loan tenure + Age of Car cannot exceed more than 7 years.";
+        }
+        else if(loanTenure > 6){
+            document.getElementById('error').innerHTML = "Loan tenure exceed more than 6 years.";
+        }
+        else if(loanAmount > fiftyPercentOfCurrentValueOfCarValue){
+            document.getElementById('error').innerHTML = "Loan amount cannot exceed more than 50% of the Current Value of the Car.";
+        }
+        else if(loanAmount > 3000000){
+            document.getElementById('error').innerHTML = "Loan amount cannot exceed Rs. 3,000,000.";
+        }
+    }
+
+    if(!purposeOfLoan.localeCompare("refinancing")){
+        var fiftyPercentOfCurrentValueOfCarValue = currentValueOfCarValue*0.5;
+        if(loanAmount > fiftyPercentOfCurrentValueOfCarValue){
+            document.getElementById('error').innerHTML = "Loan amount cannot exceed more than 50% of the Current Value of the Car.";
+        }
+        else if(loanAmount > 3000000){
+            document.getElementById('error').innerHTML = "Loan amount cannot exceed Rs. 3,000,000.";
+        }
+        else if(loanTenure + ageOfCar > 7){
+            document.getElementById('error').innerHTML = "Loan tenure + Age of Car cannot exceed more than 7 years.";
+        }
+    }
+
     return false;
 }
 
