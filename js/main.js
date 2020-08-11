@@ -86,11 +86,39 @@ function validateLoanTenure(){
 }
 //#endregion
 
+function calculateEMI(loanAmount, loanTenureInMonths, typeOfLoan){
+    var bottomRangeInterest, topRangeInterest, bottomEmiStr, topEmiStr;
+    var topRangeInterest;
+    var baseInterest = 10;
+
+   if(!typeOfLoan.localeCompare("personal")){
+        bottomRangeInterest = 2.5;
+        topRangeInterest = 5.0
+   }
+    
+    bottomEmiStr = mathEmi(loanAmount, baseInterest+bottomRangeInterest, loanTenureInMonths); 
+    topEmiStr = mathEmi(loanAmount, baseInterest+topRangeInterest, loanTenureInMonths); 
+    
+    document.getElementById('error').innerHTML = "EMI Range: " + bottomEmiStr + " - " + topEmiStr;
+}
+
+function mathEmi(loanAmount, baseInterest, loanTenureInMonths){
+    var monthlyInterestRatio = (baseInterest/100)/12;
+    var top = Math.pow((1+monthlyInterestRatio),loanTenureInMonths);
+    var bottom = top-1;
+    var sp = top / bottom;
+    var emi = ((loanAmount * monthlyInterestRatio) * sp);
+    var emistr = emi.toFixed(2).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    return emistr;
+}
+
 function validateCarLoanForm(){
     var purposeOfLoan = document.forms["carLoanForm"]["purposeOfLoan"].value;
     var typeOfLoan = document.forms["carLoanForm"]["typeOfLoan"].value;
     var loanAmount = parseFloat(document.forms["carLoanForm"]["loanAmount"].value);
     var loanTenure = parseFloat(document.forms["carLoanForm"]["loanTenure"].value);
+    var loanTenureInMonths = loanTenure*12;
     var ageOfCar = parseFloat(document.forms["carLoanForm"]["carAgeValue"].value);
     var currentValueOfCarValue = parseFloat(document.forms["carLoanForm"]["currentValueOfCarValue"].value);
     var vatBillAmountValue = parseFloat(document.forms["carLoanForm"]["vatBillAmountValue"].value);
@@ -108,7 +136,7 @@ function validateCarLoanForm(){
             document.getElementById('error').innerHTML = "Loan tenure cannot exceed more than 7 years.";
         }
         else{
-            document.getElementById('error').innerHTML = "";
+            calculateEMI(loanAmount, loanTenureInMonths, typeOfLoan);
         }
     }
 
@@ -126,7 +154,7 @@ function validateCarLoanForm(){
         }
         //Distress Value Coming soon!!!
         else{
-            document.getElementById('error').innerHTML = "";
+            calculateEMI(loanAmount, loanTenureInMonths, typeOfLoan);
         }
     }
 
@@ -144,6 +172,9 @@ function validateCarLoanForm(){
         else if(loanAmount > 3000000){
             document.getElementById('error').innerHTML = "Loan amount cannot exceed Rs. 3,000,000.";
         }
+        else{
+            calculateEMI(loanAmount, loanTenureInMonths, typeOfLoan);   
+        }
     }
 
     if(!purposeOfLoan.localeCompare("refinancing")){
@@ -156,6 +187,9 @@ function validateCarLoanForm(){
         }
         else if(loanTenure + ageOfCar > 7){
             document.getElementById('error').innerHTML = "Loan tenure + Age of Car cannot exceed more than 7 years.";
+        }
+        else{
+            calculateEMI(loanAmount, loanTenureInMonths, typeOfLoan);
         }
     }
 
