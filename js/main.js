@@ -89,17 +89,21 @@ function validateLoanTenure(){
 function calculateEMI(loanAmount, loanTenureInMonths, typeOfLoan){
     var bottomRangeInterest, topRangeInterest, bottomEmiStr, topEmiStr;
     var topRangeInterest;
-    var baseInterest = 10;
+    var baseInterest = 8;
 
    if(!typeOfLoan.localeCompare("personal")){
         bottomRangeInterest = 2.5;
+        topRangeInterest = 5.0
+   }else if(!typeOfLoan.localeCompare("commercial")){
+        bottomRangeInterest = 4.0;
         topRangeInterest = 5.0
    }
     
     bottomEmiStr = mathEmi(loanAmount, baseInterest+bottomRangeInterest, loanTenureInMonths); 
     topEmiStr = mathEmi(loanAmount, baseInterest+topRangeInterest, loanTenureInMonths); 
     
-    document.getElementById('error').innerHTML = "EMI Range: " + bottomEmiStr + " - " + topEmiStr;
+    return [bottomEmiStr, topEmiStr];
+
 }
 
 function mathEmi(loanAmount, baseInterest, loanTenureInMonths){
@@ -121,56 +125,78 @@ function validateCarLoanForm(){
     var loanTenureInMonths = loanTenure*12;
     var ageOfCar = parseFloat(document.forms["carLoanForm"]["carAgeValue"].value);
     var currentValueOfCarValue = parseFloat(document.forms["carLoanForm"]["currentValueOfCarValue"].value);
+    var grossIncome = parseFloat(document.forms["carLoanForm"]["grossIncome"].value);
+    var otherLoanObligations = parseFloat(document.forms["carLoanForm"]["loanObligations"].value);
     var vatBillAmountValue = parseFloat(document.forms["carLoanForm"]["vatBillAmountValue"].value);
+    var error = null;
+    var emi1;
+    var emi2;
 
     if(!purposeOfLoan.localeCompare("newVehicle") && !typeOfLoan.localeCompare("personal")){
         var fiftyPercentOfVatBill = vatBillAmountValue*0.5;
         if(loanAmount > fiftyPercentOfVatBill){
-            document.getElementById('error').innerHTML = "Loan amount cannot exceed more than 50% of the Vat Bill Value.";
+            error = "Loan amount cannot exceed more than 50% of the Vat Bill Value.";
         }
         else if(loanAmount > 8000000){
-            document.getElementById('error').innerHTML = "Loan amount cannot exceed Rs. 8,000,000.";
+            error = "Loan amount cannot exceed Rs. 8,000,000.";
         }
         else if(loanTenure > 7)
         {
-            document.getElementById('error').innerHTML = "Loan tenure cannot exceed more than 7 years.";
+            error = "Loan tenure cannot exceed more than 7 years.";
         }
         else{
-            calculateEMI(loanAmount, loanTenureInMonths, typeOfLoan);
+            emiValues = calculateEMI(loanAmount, loanTenureInMonths, typeOfLoan);
+            var grossDifference = grossIncome-otherLoanObligations;
+            var fiftyPercentOfGrossDifference = grossDifference*0.5;
+            if(emiValues[0] > fiftyPercentOfGrossDifference){
+                error = "Emi Range Values cannot exceed more than fifty percent of Gross Income - Other Loan Obligations";
+            }
+            else{
+                emi1 = emiValues[0];
+                emi2 = emiValues[1];
+            }
         }
     }
 
     if(!purposeOfLoan.localeCompare("newVehicle") && !typeOfLoan.localeCompare("commercial")){
         var seventyPercentOfVatBill = vatBillAmountValue*0.7;
         if(loanAmount > seventyPercentOfVatBill){
-            document.getElementById('error').innerHTML = "Loan amount cannot exceed more than 70% of the Vat Bill Value.";
+            error = "Loan amount cannot exceed more than 70% of the Vat Bill Value.";
         }
         else if(loanAmount > 8000000){
-            document.getElementById('error').innerHTML = "Loan amount cannot exceed Rs. 8,000,000.";
+            error = "Loan amount cannot exceed Rs. 8,000,000.";
         }
         else if(loanTenure > 5)
         {
-            document.getElementById('error').innerHTML = "Loan tenure cannot exceed more than 5 years.";
+            error = "Loan tenure cannot exceed more than 5 years.";
         }
         //Distress Value Coming soon!!!
         else{
-            calculateEMI(loanAmount, loanTenureInMonths, typeOfLoan);
+            var emiValues = calculateEMI(loanAmount, loanTenureInMonths, typeOfLoan);
+            var grossDifference = grossIncome-otherLoanObligations;
+            var fiftyPercentOfGrossDifference = grossDifference*0.5;
+            if(emiValues[0] > fiftyPercentOfGrossDifference){
+                error = "Emi Range Values cannot exceed more than fifty percent of Gross Income - Other Loan Obligations";
+            }else{
+                //send all the values to fhirBase
+                document.getElementById('error').innerHTML = "EMI Range: " + emiValues[0] + " - " + emiValues[1]+ " Gross-OtherLoan: " + grossDifference;
+            }
         }
     }
 
     if(!purposeOfLoan.localeCompare("oldVehicle")){
         var fiftyPercentOfCurrentValueOfCarValue = currentValueOfCarValue*0.5;
         if(loanTenure + ageOfCar > 7){
-            document.getElementById('error').innerHTML = "Loan tenure + Age of Car cannot exceed more than 7 years.";
+            error = "Loan tenure + Age of Car cannot exceed more than 7 years.";
         }
         else if(loanTenure > 6){
-            document.getElementById('error').innerHTML = "Loan tenure exceed more than 6 years.";
+            error = "Loan tenure exceed more than 6 years.";
         }
         else if(loanAmount > fiftyPercentOfCurrentValueOfCarValue){
-            document.getElementById('error').innerHTML = "Loan amount cannot exceed more than 50% of the Current Value of the Car.";
+            error = "Loan amount cannot exceed more than 50% of the Current Value of the Car.";
         }
         else if(loanAmount > 3000000){
-            document.getElementById('error').innerHTML = "Loan amount cannot exceed Rs. 3,000,000.";
+            error = "Loan amount cannot exceed Rs. 3,000,000.";
         }
         else{
             calculateEMI(loanAmount, loanTenureInMonths, typeOfLoan);   
@@ -180,92 +206,18 @@ function validateCarLoanForm(){
     if(!purposeOfLoan.localeCompare("refinancing")){
         var fiftyPercentOfCurrentValueOfCarValue = currentValueOfCarValue*0.5;
         if(loanAmount > fiftyPercentOfCurrentValueOfCarValue){
-            document.getElementById('error').innerHTML = "Loan amount cannot exceed more than 50% of the Current Value of the Car.";
+            error = "Loan amount cannot exceed more than 50% of the Current Value of the Car.";
         }
         else if(loanAmount > 3000000){
-            document.getElementById('error').innerHTML = "Loan amount cannot exceed Rs. 3,000,000.";
+            error = "Loan amount cannot exceed Rs. 3,000,000.";
         }
         else if(loanTenure + ageOfCar > 7){
-            document.getElementById('error').innerHTML = "Loan tenure + Age of Car cannot exceed more than 7 years.";
+            error = "Loan tenure + Age of Car cannot exceed more than 7 years.";
         }
         else{
             calculateEMI(loanAmount, loanTenureInMonths, typeOfLoan);
         }
     }
 
-    return false;
+    return [error, emi1, emi2];
 }
-
-
-// //Reference for CarLoan
-// var carLoanRef = firebase.database().ref('carLoan');
-// var firebaseAuth = firebase.auth();
-
-// //Listen for form submit
-// //document.getElementById('carLoanForm').addEventListener('submit', submitForm);
-
-// //Sumbit Form
-// function submitForm(e){
-//     e.preventDefault();
-
-//     //Get Values
-//     var ownerTypeOfCar = getInputVal('ownerTypeOfCar');
-//     var carMarketValue = getInputVal('carMarketValue');
-//     var requestedLoanAmount = getInputVal('requestedLoanAmount');
-//     var grossIncome = getInputVal('grossIncome');
-
-//     //Save Message
-//     saveCarLoanForm(ownerTypeOfCar, carMarketValue, requestedLoanAmount, grossIncome)
-//     document.querySelector('.alert').style.display = 'block';
-
-//     setTimeout(function(){
-//         document.querySelector('.alert').style.display = 'none';
-//     }, 3000);
-    
-// }
-
-// //Function to get form values
-// function getInputVal(id){
-//     return document.getElementById(id).value;
-// }
-
-// //Save the message to firebase
-// function saveCarLoanForm(ownerTypeOfCar, carMarketValue, requestedLoanAmount, grossIncome){
-//     var newCarLoanRef = carLoanRef.push();
-//     newCarLoanRef.set({
-//         ownerTypeOfCar : ownerTypeOfCar,
-//         carMarketValue : carMarketValue,
-//         requestedLoanAmount : requestedLoanAmount,
-//         grossIncome : grossIncome
-//     });
-// }
-
-
-
-
-// //Login 
-// function login(){
-//     var userEmail = document.getElementById("usr_email").value;
-//     var userPassword = document.getElementById("usr_password").value;
-
-//     firebase.auth().signInWithEmailAndPassword(userEmail, userPassword).catch(function(error) {
-//         // Handle Errors here.
-//         var errorCode = error.code;
-//         var errorMessage = error.message;
-        
-//         window.alert("Error Message: " + errorMessage)
-//         //window.location.replace("index.html");
-//     });
-
-//     window.alert("Login Successful")
-//    // window.location.replace("user.html");
-// }
-
-// // function logout(){
-// //     firebaseAuth.signOut().then(function() {
-// //         window.location.replace("./index.html");
-// //       }).catch(function(error) {
-// //         // An error happened.
-// //     });
-// //     //window.location.replace("index.html");
-// // }

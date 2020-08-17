@@ -1,5 +1,4 @@
 //Create a firebase user
-
 const signupForm = document.querySelector('#signup-form');
     
 signupForm.addEventListener('submit', (e)=>{

@@ -52,7 +52,7 @@
                 <div class="row">
                     <div class="col-sm-4"></div>
                     <div class="col-sm-4">
-                        <form id="carLoanForm" action="" onsubmit="return validateCarLoanForm()">
+                        <form id="carLoanForm" onsubmit="return validateCarLoanForm()">
 
                             <div class="form-group">
                                 <label>Name</label>
@@ -75,6 +75,7 @@
                                 </select>
                             </div>
 
+                            
                             <div class="form-group" style="display: none;" id="vatBillAmount">
                                 <label for="vatBillamount">Vat Bill Amount of the Car</label>
                                 <input type="text" class="form-control" id="vatBillAmountValue" name="vatBillAmountValue" onblur="return validateFloatValue('vatBillAmountValue' ,'vatBillAmountError')">
@@ -82,20 +83,20 @@
                             </div>
 
                             <div class="form-group" style="display: none;" id="carAge">
-                                <label for="vatBillamount">How old is the car?</label>
-                                <input type="text" class="form-control" id="carAgeValue" onblur="return validateFloatValue('carAgeValue' ,'carAgeError')">
+                                <label for="carAge">How old is the car?</label>
+                                <input type="text" class="form-control" id="carAgeValue" name="carAgeValue" onblur="return validateFloatValue('carAgeValue' ,'carAgeError')">
                                 <span class="errorText" style="color: red;" id="carAgeError"></span>
                             </div>
 
                             <div class="form-group" style="display: none;" id="currentValueOfCar">
-                                <label for="vatBillamount">Current value of the car?</label>
-                                <input type="text" class="form-control" id="currentValueOfCarValue" onblur="return validateFloatValue('currentValueOfCarValue' ,'currentValueOfCarError')">
+                                <label for="currentValueOfCar">Current value of the car?</label>
+                                <input type="text" class="form-control" id="currentValueOfCarValue" name="currentValueOfCarValue" onblur="return validateFloatValue('currentValueOfCarValue' ,'currentValueOfCarError')">
                                 <span class="errorText" style="color: red;" id="currentValueOfCarError"></span>
                             </div>
 
                             <div class="form-group">
                                 <label for="typeOfLoan">Type of Loan</label>
-                                <select class="form-control" id="typeOfLoan" name="typeOfLoan" required>
+                                <select class="form-control" id="typeOfLoan" name="typeOfLoan" name="typeOfLoan" required>
                                     <option value="" selected disabled hidden>Choose here</option>
                                     <option value="personal">Personal</option>
                                     <option value="commercial">Commercial</option>
@@ -104,7 +105,7 @@
 
                             <div class="form-group">
                                 <label for="typeOfVehicle">Type of Vehicle</label>
-                                <select class="form-control" id="typeOfVehicle" required>
+                                <select class="form-control" id="typeOfVehicle" name="typeOfVehicle" required>
                                     <option value="" selected disabled hidden>Choose here</option>
                                     <option value="personal">Personal</option>
                                     <option value="commercial">Commercial</option>
@@ -127,16 +128,15 @@
 
                             <div class="form-group">
                                 <label for="grossIncome">Gross Income (per latest tax filing)</label>
-                                <input type="text" class="form-control" id="grossIncome" required="required" onblur="return validateFloatValue('grossIncome' ,'grossIncomeError')">
+                                <input type="text" class="form-control" id="grossIncome" name="grossIncome" required="required" onblur="return validateFloatValue('grossIncome' ,'grossIncomeError')">
                                 <span class="errorText" style="color: red;" id="grossIncomeError"></span>
                             </div>
 
                             <div class="form-group">
                                 <label for="loanObligations">Other Monthly Loan Obligations:</label>
-                                <input type="text" class="form-control" id="loanObligations" required="required" onblur="return validateFloatValue('loanObligations' ,'loanObligationsError')">
+                                <input type="text" class="form-control" id="loanObligations" name="loanObligations" required="required" onblur="return validateFloatValue('loanObligations' ,'loanObligationsError')">
                                 <span class="errorText" style="color: red;" id="loanObligationsError"></span>
                             </div>
-
                             
                             <input type="submit" class="btn btn-outline-info mb-2" value="Submit"></br>
                             <span class="errorText" id="error" style="color: red;"></span>
@@ -189,9 +189,11 @@
         <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-app.js"></script>
         <!-- Add Firebase products that you want to use -->
         <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-database.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.16.0/firebase-firestore.js"></script>
         <script src="js/main.js"></script>
         <script src="js/firebaseConfiguration.js"></script>
         <script src="js/firebaseLogin.js"></script>
+        <script src="js/firebaseDataStore.js"></script>
     </body>
 </html>

@@ -8,6 +8,7 @@ firebaseLogout.addEventListener('click', (e)=>{
     })
 })
 
+//User Logged in
 firebaseAuth.onAuthStateChanged((user) =>{
     if(user){
         const email = user.email;
